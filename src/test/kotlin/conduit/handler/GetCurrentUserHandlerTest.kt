@@ -12,11 +12,11 @@ import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
 
 class GetCurrentUserHandlerTest {
-    lateinit var unit: GetCurrentUserHandlerImpl
+    lateinit var unit: GetCurrentUser
 
     @BeforeEach
     fun beforeEach() {
-        unit = GetCurrentUserHandlerImpl(
+        unit = GetCurrentUser(
             repository = mockk(relaxed = true)
         )
     }

@@ -12,12 +12,12 @@ import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class RegisterUserHandlerImplTest {
-    lateinit var unit: RegisterUserHandlerImpl
+class RegisterUserTest {
+    lateinit var unit: RegisterUser
 
     @BeforeEach
     fun beforeEach() {
-        unit = RegisterUserHandlerImpl(
+        unit = RegisterUser(
             repository = mockk(relaxed = true)
         )
     }

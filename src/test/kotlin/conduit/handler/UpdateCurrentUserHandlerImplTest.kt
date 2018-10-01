@@ -10,12 +10,12 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
-class UpdateCurrentUserHandlerImplTest {
-    lateinit var unit: UpdateCurrentUserHandlerImpl
+class UpdateCurrentUserTest {
+    lateinit var unit: UpdateCurrentUser
 
     @BeforeEach
     fun beforeEach() {
-        unit = UpdateCurrentUserHandlerImpl(
+        unit = UpdateCurrentUser(
             repository = mockk(relaxed = true)
         )
     }

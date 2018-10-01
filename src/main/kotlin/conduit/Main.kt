@@ -1,9 +1,9 @@
 package conduit
 
-import conduit.handler.GetCurrentUserHandlerImpl
-import conduit.handler.LoginHandlerImpl
-import conduit.handler.RegisterUserHandlerImpl
-import conduit.handler.UpdateCurrentUserHandlerImpl
+import conduit.handler.GetCurrentUser
+import conduit.handler.Login
+import conduit.handler.RegisterUser
+import conduit.handler.UpdateCurrentUser
 import conduit.repository.ConduitRepositoryImpl
 import org.apache.logging.log4j.core.config.Configurator
 import org.http4k.server.Jetty
@@ -19,19 +19,16 @@ fun main(args: Array<String>) {
     val database = Database.connect("jdbc:h2:~/conduit", driver = "org.h2.Driver")
     val repository = ConduitRepositoryImpl(database)
 
-    val loginHandler = LoginHandlerImpl(repository)
-    val registerUserHandler = RegisterUserHandlerImpl(repository)
-    val getCurrentUserHandler = GetCurrentUserHandlerImpl(repository)
-    val updateCurrentUserHandler = UpdateCurrentUserHandlerImpl(repository)
-
     val app = Router(
-        loginHandler,
-        registerUserHandler,
-        getCurrentUserHandler,
-        updateCurrentUserHandler
+        Login(repository),
+        RegisterUser(repository),
+        GetCurrentUser(repository),
+        UpdateCurrentUser(repository)
     )()
 
     logger.info("Starting server...")
-    app.asServer(Jetty(9000)).start()
-    logger.info("Server started on port 9000")
+
+    app.asServer(Jetty(9000)).start().apply {
+        logger.info("Server started on port 9000")
+    }
 }

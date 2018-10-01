@@ -5,18 +5,11 @@ import conduit.model.extractEmail
 import conduit.repository.ConduitRepository
 import conduit.util.TokenAuth
 
-interface UpdateCurrentUserHandler {
-    operator fun invoke(tokenInfo: TokenAuth.TokenInfo, updateUser: UpdateUser): UserDto
-}
-
-class UpdateCurrentUserHandlerImpl(val repository: ConduitRepository) : UpdateCurrentUserHandler {
+class UpdateCurrentUser(val repository: ConduitRepository) : (TokenAuth.TokenInfo, UpdateUser) -> UserDto {
     override fun invoke(tokenInfo: TokenAuth.TokenInfo, updateUser: UpdateUser): UserDto {
         val email = tokenInfo.extractEmail()
 
-        val user = repository.updateUser(
-            email,
-            updateUser
-        )
+        val user = repository.updateUser(email, updateUser)
 
         return UserDto(
             user.email,

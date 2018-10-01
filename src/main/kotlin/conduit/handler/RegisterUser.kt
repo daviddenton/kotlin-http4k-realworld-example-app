@@ -10,11 +10,7 @@ import conduit.util.generateToken
 import conduit.util.hash
 import org.http4k.core.Status
 
-interface RegisterUserHandler {
-    operator fun invoke(newUserDto: NewUserDto): UserDto
-}
-
-class RegisterUserHandlerImpl(val repository: ConduitRepository) : RegisterUserHandler {
+class RegisterUser(val repository: ConduitRepository) : (NewUserDto) -> UserDto {
     override fun invoke(newUserDto: NewUserDto): UserDto {
         repository.insertUser(
             newUserDto.let {

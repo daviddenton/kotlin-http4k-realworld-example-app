@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
 
-class LoginHandlerImplTest {
-    lateinit var unit: LoginHandlerImpl
+class LoginTest {
+    lateinit var unit: Login
 
     @BeforeEach
     fun beforeEach() {
-        unit = LoginHandlerImpl(
+        unit = Login(
             repository = mockk(relaxed = true)
         )
     }
